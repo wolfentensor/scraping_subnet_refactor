@@ -1,0 +1,6 @@
+[submodule "subtensor"]
+	path = subtensor
+	url = https://github.com/opentensor/subtensor
+[submodule "neurons/sources/scrapeforce"]
+	path = neurons/sources/scrapeforce
+	url = https://github.com/Gwolfgit/ScrapeForce
