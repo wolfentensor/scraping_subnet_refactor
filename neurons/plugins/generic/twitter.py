@@ -1,16 +1,36 @@
 import asyncio
 from neurons.abstract import ScrapingPlugin
+from neurons.structures.queries import QueryType
+from bittensor.synapse import Synapse
+from typing import *
 
 
-class TwitterSource(ScrapingPlugin):
+class GenericTwitterPlugin(ScrapingPlugin):
+    plugin_name: str = "GenericTwitterPlugin"
+    plugin_target: QueryType = QueryType.TWITTER
+    plugin_author: "Greg Wolf <gregory@opentensor.dev>"
+    plugin_version: "0.1"
 
-    async def fetch_data(self, query):
-        pass
 
-    async def twitterScrap(
-            self,
-        synapse: scraping.protocol.TwitterScrap,
-    ) -> scraping.protocol.TwitterScrap:
+    async def configure(self, synapse, metagraph, synapse_config):
+        ...
+
+
+        ...
+
+    async def blacklist_fn(self, query) -> Tuple[bool, str]:
+        ...
+
+    async def priority_fn(self, query):
+        ...
+
+    async def verify_fn(self, query):
+        ...
+
+    async def deserialize(self) -> Synapse:
+        ...
+
+    async def forward_fn(self, synapse: Synapse):
         """
         This function runs after the TwitterScrap synapse has been deserialized (i.e. after synapse.data is available).
         This function runs after the blacklist and priority functions have been called.

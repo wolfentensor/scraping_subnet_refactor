@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Optional
+from typing import Optional, Tuple, Dict, List, Callable
 import bittensor as bt
 from packaging.version import Version
 
@@ -13,16 +13,33 @@ class ScrapingPlugin(ABC, bt.Synapse):
     and version control among different plugin implementations.
 
     Attributes:
-        version (Optional[Version]): Specifies the plugin version for compatibility checks.
+        plugin_name (Optional[str]): Specifies the plugin name.
+        plugin_author (Optional[str]): Specifies the plugin author.
+        plugin_version (Optional[str]): Specifies the plugin version for compatibility checks.
+        bittensor_version (Optional[Version]): Specifies the bittensor version for compatibility checks.
+        version (Optional[Version]): an alias of bittensor_version for backwards compatibility.
     """
+    REQUIRED_VERSION = ">=6.9.3"
 
-    version: Optional[Version] = None
+    plugin_name: Optional[str] = None
+    plugin_target: Optional[str] = None
+    plugin_author: Optional[str] = None
+    plugin_version: Optional[str] = None
+    version = REQUIRED_VERSION
 
     def __init__(self, *args, **kwargs):
         super().__init__()
         self._source_config = None
         self._source_metagraph = None
         self._source_synapse = None
+
+    def __str__(self):
+        return f"{self.plugin_name} {self.plugin_version} (Bittensor {self.bittensor_version})"
+
+    def __repr__(self):
+        return (f"{self.__class__.__name__}(plugin_name={self.plugin_name!r}, "
+                f"plugin_author={self.plugin_author!r}, plugin_version={self.plugin_version!r}, "
+                f"bittensor_version={self.bittensor_version!r})")
 
     @abstractmethod
     async def configure(self, synapse, metagraph, synapse_config):
@@ -43,7 +60,7 @@ class ScrapingPlugin(ABC, bt.Synapse):
         raise NotImplemented("Concrete subclasses must implement forward_fn")
 
     @abstractmethod
-    async def blacklist_fn(self, query):
+    async def blacklist_fn(self, query) -> Tuple[bool, str]:
         """
         Defines the blacklist function to filter out queries.
 
@@ -90,3 +107,5 @@ class ScrapingPlugin(ABC, bt.Synapse):
             NotImplemented: If the subclass has not implemented this method.
         """
         raise NotImplemented("Concrete subclasses must implement deserialize")
+
+

@@ -6,6 +6,8 @@
       <sourceFolder url="file://$MODULE_DIR$/neurons/scrapeforce/botasaurus/bota" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/neurons/scrapeforce/botasaurus/botasaurus_api" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/neurons/scrapeforce/botasaurus/botasaurus_server" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/submodules/python-banshee/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/submodules/python-inject/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
     </content>
     <orderEntry type="inheritedJdk" />
