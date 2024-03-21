@@ -4,9 +4,3 @@
 [submodule "neurons/sources/scrapeforce"]
 	path = neurons/sources/scrapeforce
 	url = https://github.com/Gwolfgit/ScrapeForce
-[submodule "submodules/python-banshee"]
-	path = submodules/python-banshee
-	url = https://github.com/artisanofcode/python-banshee
-[submodule "submodules/python-inject"]
-	path = submodules/python-inject
-	url = https://github.com/ivankorobkov/python-inject.git

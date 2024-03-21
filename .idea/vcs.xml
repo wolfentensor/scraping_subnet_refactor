@@ -2,8 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/neurons/plugins/scrapeforce" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/neurons/sources/scrapeforce" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/submodules/python-banshee" vcs="Git" />
   </component>
 </project>
