@@ -32,8 +32,8 @@ from typing import Tuple
 import random
 import torch
 from neurons.queries import get_query, QueryType, QueryProvider
-from neurons.sources.twitter import TwitterSource
-from neurons.sources.reddit import RedditSource
+from neurons.plugins.twitter import TwitterSource
+from neurons.plugins.reddit import RedditSource
 from neurons.structures.priority_queue import AsyncPriorityQueue
 
 # TODO: Check if all the necessary libraries are installed and up-to-date

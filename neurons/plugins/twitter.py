@@ -1,8 +1,8 @@
 import asyncio
-from neurons.abstract import ScrapingSource
+from neurons.abstract import ScrapingPlugin
 
 
-class TwitterSource(ScrapingSource):
+class TwitterSource(ScrapingPlugin):
 
     async def fetch_data(self, query):
         pass

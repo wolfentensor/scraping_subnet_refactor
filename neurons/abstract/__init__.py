@@ -1,1 +1,1 @@
-from .source import ScrapingSource
+from .plugin import ScrapingPlugin
