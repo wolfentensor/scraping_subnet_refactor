@@ -29,12 +29,12 @@ import traceback
 import bittensor as bt
 import scraping
 from typing import Tuple
-import random
 import torch
 from neurons.queries import get_query, QueryType, QueryProvider
 from neurons.plugins.twitter import TwitterSource
 from neurons.plugins.reddit import RedditSource
 from neurons.structures.priority_queue import AsyncPriorityQueue
+import secrets
 
 # TODO: Check if all the necessary libraries are installed and up-to-date
 
@@ -92,7 +92,7 @@ async def random_line(a_file="keywords.txt"):
         print(f"Keyword file not found at location: {a_file}")
         quit()
     lines = open(a_file).read().splitlines()
-    return random.choice(lines)
+    return secrets.SystemRandom().choice(lines)
 
 
 # Main takes the config and starts the miner.

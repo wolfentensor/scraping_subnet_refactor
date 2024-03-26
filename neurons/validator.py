@@ -36,6 +36,7 @@ import score.twitter_score
 import storage.store
 from apify_client import ApifyClient
 from neurons.queries import get_query, QueryType, QueryProvider
+import secrets
 
 
 # This function is responsible for setting up and parsing command-line arguments.
@@ -82,15 +83,12 @@ def get_config():
     return config
 
 
-import random
-
-
 def random_line(a_file="keywords.txt"):
     if not os.path.exists(a_file):
         bt.logging.error(f"Keyword file not found at location: {a_file}")
         exit(1)
     lines = open(a_file).read().splitlines()
-    return random.choice(lines)
+    return secrets.SystemRandom().choice(lines)
 
 
 def main(config):
@@ -236,8 +234,7 @@ def main(config):
         zipped_uids = list(zip(uids, queryable_uids))
         filtered_uids = list(zip(*filter(lambda x: x[1], zipped_uids)))[0]
         bt.logging.info(f"filtered_uids:{filtered_uids}")
-        dendrites_to_query = random.sample(
-            filtered_uids, min(dendrites_per_query, len(filtered_uids))
+        dendrites_to_query = secrets.SystemRandom().sample(filtered_uids, min(dendrites_per_query, len(filtered_uids))
         )
         bt.logging.info(f"dendrites_to_query:{dendrites_to_query}")
 
