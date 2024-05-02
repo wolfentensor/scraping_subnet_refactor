@@ -2,6 +2,7 @@ import logging
 from neurons.apify.actors import run_actor, run_actor_async, ActorConfig
 from datetime import datetime, timezone
 import asyncio
+from typing import Optional
 
 # Setting up logger for debugging and information purposes
 logger = logging.getLogger(__name__)
@@ -47,7 +48,7 @@ class MicroworldsTwitterScraper:
 
     def execute(
         self,
-        search_queries: list = ["bittensor"],
+        search_queries: Optional[list] = None,
         limit_number: int = 15,
         validator_key: str = "None",
         validator_version: str = None,
@@ -62,6 +63,7 @@ class MicroworldsTwitterScraper:
         Returns:
             list: A list of tweets.
         """
+        search_queries = ["bittensor"] if search_queries is None else search_queries
         run_input = {
             "maxRequestRetries": 3,
             "searchMode": "live",

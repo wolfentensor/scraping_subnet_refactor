@@ -1,6 +1,7 @@
 import logging
 from neurons.apify.actors import run_actor, ActorConfig
 from datetime import datetime
+from typing import Optional
 
 # Setting up logger for debugging and information purposes
 logger = logging.getLogger(__name__)
@@ -21,8 +22,9 @@ class EpctexRedditScraper:
         self.actor_config = ActorConfig("jwR5FKaWaGSmkeq2b")
 
     def searchByUrl(
-        self, urls: list = ["https://twitter.com/elonmusk/status/1384874438472844800"]
+        self, urls: Optional[list] = None
     ):
+        urls = ["https://twitter.com/elonmusk/status/1384874438472844800"] if urls is None else urls
         run_input = {
             "customMapFunction": "(object) => { return {...object} }",
             "endPage": 1,
@@ -70,7 +72,7 @@ class EpctexRedditScraper:
         return self.map(all_items)
 
     def execute(
-        self, search_queries: list = ["bittensor"], limit_number: int = 15
+        self, search_queries: Optional[list] = None, limit_number: int = 15
     ) -> list:
         """
         Execute the tweet reddit query process using the specified search queries.
@@ -81,6 +83,7 @@ class EpctexRedditScraper:
         Returns:
             list: A list of reddit posts.
         """
+        search_queries = ["bittensor"] if search_queries is None else search_queries
         run_input = {
             "customMapFunction": "(object) => { return {...object} }",
             "endPage": 1,

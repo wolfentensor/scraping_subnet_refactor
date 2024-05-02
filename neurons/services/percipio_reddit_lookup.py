@@ -1,4 +1,5 @@
 import requests
+from typing import Optional
 
 
 class PercipioRedditLookup:
@@ -9,7 +10,7 @@ class PercipioRedditLookup:
     def __init__(self):
         pass
 
-    def lookup(self, ids: [int] = ["bittensor"]) -> list:
+    def lookup(self, ids: Optional[[int]] = None) -> list:
         """
         Find reddit posts/comments by id. Id should be full name form, with prefix, for example: t3_17mhoqv
 
@@ -19,6 +20,7 @@ class PercipioRedditLookup:
         Returns:
             list: A list of reddit posts/comments/etc.
         """
+        ids = ["bittensor"] if ids is None else ids
 
         ids_str = ",".join(ids)
         url = "https://api.percip.io/reddit_ids/" + ids_str

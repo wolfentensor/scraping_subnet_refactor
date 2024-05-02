@@ -1,5 +1,6 @@
 import logging
 from neurons.apify.actors import run_actor, ActorConfig
+from typing import Optional
 
 # Setting up logger for debugging and information purposes
 logger = logging.getLogger(__name__)
@@ -22,11 +23,12 @@ class TweetFlashQuery:
         self.actor_config.timeout_secs = 30
 
     def searchByUrl(
-        self, urls: list = ["https://twitter.com/elonmusk/status/1384874438472844800"]
+        self, urls: Optional[list] = None
     ):
         """
         Search for tweets by url.
         """
+        urls = ["https://twitter.com/elonmusk/status/1384874438472844800"] if urls is None else urls
         run_input = {
             "filter:blue_verified": False,
             "filter:has_engagement": False,
@@ -53,7 +55,7 @@ class TweetFlashQuery:
 
     def execute(
         self,
-        search_queries: list = ["bittensor"],
+        search_queries: Optional[list] = None,
         limit_number: int = 15,
         validator_key: str = "None",
         validator_version: str = None,
@@ -68,6 +70,7 @@ class TweetFlashQuery:
         Returns:
             list: A list of tweets.
         """
+        search_queries = ["bittensor"] if search_queries is None else search_queries
         run_input = {
             "collect_user_info": False,
             "detect_language": False,

@@ -1,4 +1,5 @@
 from neurons.apify.actors import run_actor, ActorConfig
+from typing import Optional
 
 
 class TweetScraperQuery:
@@ -16,7 +17,7 @@ class TweetScraperQuery:
         self.actor_config = ActorConfig("2s3kSMq7tpuC3bI6M")
 
     def execute(
-        self, search_queries: list = ["bittensor"], limit_number: int = 15
+        self, search_queries: Optional[list] = None, limit_number: int = 15
     ) -> list:
         """
         Execute the tweet scraping process using the specified search queries.
@@ -27,6 +28,7 @@ class TweetScraperQuery:
         Returns:
             list: A list of scraped tweet data.
         """
+        search_queries = ["bittensor"] if search_queries is None else search_queries
         run_input = {
             "excludeImages": False,
             "excludeLinks": False,

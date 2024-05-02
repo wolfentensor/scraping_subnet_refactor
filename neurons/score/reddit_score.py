@@ -29,7 +29,7 @@ from dateutil.parser import parse
 reddit_query = get_query(QueryType.REDDIT, QueryProvider.PERCIPIO_REDDIT_LOOKUP)
 
 
-def calculateScore(responses=[], tag="tao"):
+def calculateScore(responses=None, tag="tao"):
     """
     This function calculates the score of responses.
     The score is calculated by the degree of similarity between responses, accuracy and time difference.
@@ -39,6 +39,7 @@ def calculateScore(responses=[], tag="tao"):
     Returns:
         list: The list of scores for each response.
     """
+    responses = [] if responses is None else responses
     if len(responses) == 0:
         return []
 

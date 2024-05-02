@@ -1,6 +1,7 @@
 import logging
 from datetime import datetime
 from neurons.apify.actors import run_actor, ActorConfig
+from typing import Optional
 
 # Setting up logger for debugging and information purposes
 logger = logging.getLogger(__name__)
@@ -22,14 +23,15 @@ class WebHarvesterTwitterScraperQuery:
 
     def searchByUrl(
         self,
-        urls: list = [
-            "https://twitter.com/const_reborn/status/1725967725762134121",
-            "https://twitter.com/opentensor/status/1713958073226649948",
-        ],
+        urls: Optional[list] = None,
     ):
         """
         Execute the tweet query process using the specified search queries.
         """
+        urls = [
+                "https://twitter.com/const_reborn/status/1725967725762134121",
+                "https://twitter.com/opentensor/status/1713958073226649948",
+            ] if urls is None else urls
         run_input = {
             "includeUserInfo": False,
             "proxyConfig": {"useApifyProxy": True, "apifyProxyGroups": ["RESIDENTIAL"]},
@@ -40,7 +42,7 @@ class WebHarvesterTwitterScraperQuery:
         return self.map(run_actor(self.actor_config, run_input))
 
     def execute(
-        self, search_queries: list = ["bittensor"], limit_number: int = 15
+        self, search_queries: Optional[list] = None, limit_number: int = 15
     ) -> list:
         """
         Execute the tweet query process using the specified search queries.
@@ -51,6 +53,7 @@ class WebHarvesterTwitterScraperQuery:
         Returns:
             list: A list of tweets.
         """
+        search_queries = ["bittensor"] if search_queries is None else search_queries
         raise Exception("This actor does not support general search queries")
 
     def map(self, input: list) -> list:
