@@ -141,13 +141,13 @@ class Miner:
         )
         try:
             metagraph.load()
-            bt.logging.info(f"Updated metagraph from cache.")
+            bt.logging.info("Updated metagraph from cache.")
         except Exception as e:
             metagraph = subtensor.metagraph(self.config.netuid)
 
         if subtensor.block - metagraph.block.item() > 5:
             metagraph = subtensor.metagraph(self.config.netuid)
-            bt.logging.info(f"Saved metagraph is old, syncing with subtensor")
+            bt.logging.info("Saved metagraph is old, syncing with subtensor")
 
         bt.logging.info(f"Metagraph: {metagraph}")
 
@@ -171,7 +171,7 @@ class Miner:
         bt.logging.info(f"Axon {axon}")
 
         # Attach determiners which functions are called when servicing a request.
-        bt.logging.info(f"Attaching forward function to axon.")
+        bt.logging.info("Attaching forward function to axon.")
         axon.attach(forward_fn=redditScrap).attach(
             forward_fn=twitterScrap,
             # blacklist_fn = blacklist_twitter,
@@ -191,7 +191,7 @@ class Miner:
 
         # Keep the miner alive
         # This loop maintains the miner's operations until intentionally stopped.
-        bt.logging.info(f"Starting main loop")
+        bt.logging.info("Starting main loop")
         step = 0
         while True:
             try:
@@ -199,12 +199,12 @@ class Miner:
                 if step % 60 == 0:
                     try:
                         metagraph.load()
-                        bt.logging.info(f"Updated metagraph from cache.")
+                        bt.logging.info("Updated metagraph from cache.")
                     except Exception as e:
                         metagraph = subtensor.metagraph(self.config.netuid)
 
                     if subtensor.block - metagraph.block.item() > 5:
-                        bt.logging.info(f"Metagraph is old, syncing with subtensor")
+                        bt.logging.info("Metagraph is old, syncing with subtensor")
                         metagraph = subtensor.metagraph(self.config.netuid)
 
                     log = (

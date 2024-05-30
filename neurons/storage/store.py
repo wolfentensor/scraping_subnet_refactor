@@ -57,7 +57,7 @@ async def save_indexing_row(file_name, source_type, row_count, search_keys: list
             ) as response:
                 return await response.json()
         except aiohttp.client_exceptions.ClientConnectorError:
-            logger.error(f"Could not connect to indexing API")
+            logger.error("Could not connect to indexing API")
             return {}
 
 

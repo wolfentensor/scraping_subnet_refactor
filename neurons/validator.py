@@ -112,7 +112,7 @@ def main(config):
     except Exception as e:
         bt.logging.error(f"{e}")
         bt.logging.error(
-            f"Unable to connect to Apify. Check your dotenv file and make sure your APIFY_API_KEY is set correctly."
+            "Unable to connect to Apify. Check your dotenv file and make sure your APIFY_API_KEY is set correctly."
         )
         exit()
 
@@ -122,7 +122,7 @@ def main(config):
     except Exception as e:
         bt.logging.error(f"{e}")
         bt.logging.error(
-            f"Unable to connect to wasabi storage. Check your dotenv file and make sure your WASABI_ACCESS_KEY_ID, WASABI_ACCESS_KEY, and INDEXING_API_KEY are set correctly."
+            "Unable to connect to wasabi storage. Check your dotenv file and make sure your WASABI_ACCESS_KEY_ID, WASABI_ACCESS_KEY, and INDEXING_API_KEY are set correctly."
         )
         exit()
 
@@ -169,7 +169,7 @@ def main(config):
         bt.logging.info(f"Loaded scores from save file: {scores}")
     except:
         scores = torch.zeros_like(metagraph.S, dtype=torch.float32)
-        bt.logging.info(f"Initialized all scores to 0")
+        bt.logging.info("Initialized all scores to 0")
 
     curr_block = subtensor.block
 
@@ -197,7 +197,7 @@ def main(config):
         # Per 10 blocks, sync the subtensor state with the blockchain.
         if step % 5 == 0:
             metagraph.sync(subtensor=subtensor)
-            bt.logging.info(f"🔄 Syncing metagraph with subtensor.")
+            bt.logging.info("🔄 Syncing metagraph with subtensor.")
 
         # If the metagraph has changed, update the weights.
         # Get the uids of all miners in the network.
@@ -353,7 +353,7 @@ def main(config):
 
             # Periodically update the weights on the Bittensor blockchain.
             if step % 4 == 2:
-                bt.logging.info(f"\033[92m ᕕ ⏩ Sending reddit query. \033[0m")
+                bt.logging.info("\033[92m ᕕ ⏩ Sending reddit query. \033[0m")
                 search_key = random_line()
                 responses = dendrite.query(
                     filtered_axons,
@@ -460,7 +460,7 @@ def main(config):
 
             if last_reset_weights_block + 1800 < current_block:
                 bt.logging.trace(
-                    f"Clearing weights for validators and nodes without IPs"
+                    "Clearing weights for validators and nodes without IPs"
                 )
                 last_reset_weights_block = current_block
 
