@@ -22,7 +22,7 @@ class PercipioRedditLookup:
 
         ids_str = ",".join(ids)
         url = "https://api.percip.io/reddit_ids/" + ids_str
-        response = requests.get(url)
+        response = requests.get(url, timeout=60)
 
         # Check if the request was successful
         if response.status_code == 200:
