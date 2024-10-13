@@ -21,7 +21,6 @@ DEALINGS IN THE SOFTWARE.
 
 import torch
 from datetime import datetime
-import random
 import traceback
 import bittensor as bt
 from typing import *
@@ -30,6 +29,7 @@ import os
 import re
 import html
 from neurons.queries import get_query, QueryType, QueryProvider
+import secrets
 
 twitter_query = get_query(QueryType.TWITTER, QueryProvider.APIDOJO_TWEET_SCRAPER)
 
@@ -130,7 +130,7 @@ def calculateScore(responses: Optional[list] = None, tag="tao"):
     spot_check_tweets = []
     for i, response in enumerate(responses):
         if len(response) > 0:
-            item_idx = random.randrange(len(response))
+            item_idx = secrets.SystemRandom().randrange(len(response))
             spot_check_idx.append(item_idx)
             url = response[item_idx].get("url")
             if url and re.search("(twitter.com|x.com)\/\w+\/status\/\d+", url):
@@ -146,8 +146,7 @@ def calculateScore(responses: Optional[list] = None, tag="tao"):
             tries = 0
             remaining_urls = set(spot_check_urls)
             while tries < 2 and len(remaining_urls) > 0:
-                urls = random.sample(
-                    sorted(remaining_urls), k=min(20, len(remaining_urls))
+                urls = secrets.SystemRandom().sample(sorted(remaining_urls), k=min(20, len(remaining_urls))
                 )
                 bt.logging.info(
                     f"Fetching {len(urls)} tweets out of {len(remaining_urls)} remaining to validate."
