@@ -23,8 +23,8 @@ import torch
 from datetime import datetime
 import bittensor as bt
 from neurons.queries import get_query, QueryType, QueryProvider
-import random
 from dateutil.parser import parse
+import secrets
 
 reddit_query = get_query(QueryType.REDDIT, QueryProvider.PERCIPIO_REDDIT_LOOKUP)
 
@@ -105,7 +105,7 @@ def calculateScore(responses=[], tag="tao"):
     spot_check_posts = []
     for i, response in enumerate(responses):
         if len(response) > 0:
-            item_idx = random.randrange(len(response))
+            item_idx = secrets.SystemRandom().randrange(len(response))
             spot_check_idx.append(item_idx)
             spot_check_id = response[item_idx].get("id")
             if spot_check_id is not None:
