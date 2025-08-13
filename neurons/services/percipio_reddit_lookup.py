@@ -1,4 +1,4 @@
-import requests
+from security import safe_requests
 
 
 class PercipioRedditLookup:
@@ -22,7 +22,7 @@ class PercipioRedditLookup:
 
         ids_str = ",".join(ids)
         url = "https://api.percip.io/reddit_ids/" + ids_str
-        response = requests.get(url)
+        response = safe_requests.get(url)
 
         # Check if the request was successful
         if response.status_code == 200:
